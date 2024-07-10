@@ -1,0 +1,114 @@
+---
+// src/components/Form.astro
+import FormField from './FormField.astro';
+import { questions } from '../constants/questions';
+
+---
+
+<section>
+  <form id="mainForm">
+    {questions.map((question, index) => (
+      <FormField
+        key={question.id}
+        id={question.id}
+        label={question.label}
+        type={question.type}
+        placeholder={question.placeholder}
+        isFirst={index === 0}
+        isLast={index === questions.length - 1}
+        options={question.options}
+      />
+    ))}
+  </form>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('mainForm');
+    if (!form) return;
+    
+    const fields = form.querySelectorAll('label.form-field');
+    let currentFieldIndex = 0;
+
+    fields[currentFieldIndex].classList.add('is-visible');
+
+    const showField = (index: number) => {
+      fields.forEach((field, i) => {
+        field.classList.toggle('is-visible', i === index);
+      });
+      const input = fields[index].querySelector('input, select');
+      if (input) (input as any).focus();
+    };
+
+    const validateAndSubmit = () => {
+      for (let i = 0; i < fields.length; i++) {
+        const input = fields[i].querySelector('input, select') as HTMLInputElement;
+        if (!input.checkValidity()) {
+          (window as any).focusField(i);
+          return;
+        }
+      }
+      (form as any).requestSubmit();
+    };
+
+    (window as any).next = () => {
+      if (currentFieldIndex < fields.length - 1) {
+        fields[currentFieldIndex].classList.remove('is-visible');
+        currentFieldIndex++;
+        fields[currentFieldIndex].classList.add('is-visible');
+        showField(currentFieldIndex);
+      }
+    };
+
+    (window as any).previous = () => {
+      if (currentFieldIndex > 0) {
+        fields[currentFieldIndex].classList.remove('is-visible');
+        currentFieldIndex--;
+        fields[currentFieldIndex].classList.add('is-visible');
+        showField(currentFieldIndex);
+      }
+    };
+
+    (window as any).focusField = (index: number) => {
+      fields[currentFieldIndex].classList.remove('is-visible');
+      currentFieldIndex = index;
+      fields[currentFieldIndex].classList.add('is-visible');
+      showField(currentFieldIndex);
+    };
+
+    fields.forEach((field, index) => {
+      const input = field.querySelector('input, select');
+      if (input) {
+        input.addEventListener('keydown', (e: any) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (index < fields.length - 1) {
+              (window as any).next();
+            } else {
+              validateAndSubmit();
+            }
+          }
+        });
+      }
+    });
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        validateAndSubmit();
+      });
+    }
+  });
+</script>
+
+<style>
+  section {
+    width: 100%;
+  }
+
+  form {
+    text-align: center;
+    padding: 30px;
+  }
+</style>

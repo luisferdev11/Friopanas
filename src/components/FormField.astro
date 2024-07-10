@@ -1,0 +1,134 @@
+---
+// src/components/FormField.astro
+import type { FormFieldProps } from '../types/types';
+
+const { id, label, type, placeholder, isFirst, isLast, options } = Astro.props as FormFieldProps;
+let value = '';
+---
+
+<label id={id} class={`form-field ${isFirst ? 'is-visible' : ''}`}>
+  <span class="label-heading">{label}</span>
+  {type === 'select' ? (
+    <select name={id} required>
+      {options?.map(option => <option value={option}>{option}</option>)}
+    </select>
+  ) : type === 'radio' ? (
+    options?.map(option => (
+      <div class="radio-option">
+        <input type="radio" id={`${id}-${option}`} name={id} value={option} required />
+        <label for={`${id}-${option}`} class="radio-button">
+           {option}
+        </label>
+      </div>
+    ))
+  ) : (
+    <input 
+      ?type={type} 
+      name={id} 
+      placeholder={placeholder}
+      required={type !== 'button' && type !== 'checkbox'}
+      value={value}
+    />
+  )}
+  <div class="nav-btn-div">
+    {!isFirst && <i class="fa fa-arrow-up" style="font-size:24px" onclick="previous()"></i>}
+    {!isLast && <i class="fa fa-arrow-down" style="font-size:24px" onclick="next()"></i>}
+    {isLast && <button type="submit" class="nav-button">Submit</button>}
+  </div>
+</label>
+
+<style>
+  .form-field {
+    display: none;
+    letter-spacing: 4px;
+    padding-top: 30px;
+    text-align: center;
+  }
+
+  .is-visible {
+    display: block;
+  }
+
+  .label-heading {
+    font-size: 14px;
+    color: white;
+  }
+
+  input, select {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 20px;
+    letter-spacing: 1px;
+    outline: 0;
+    padding: 5px 20px;
+    text-align: center;
+    transition: all 0.3s;
+    width: 200px;
+  }
+
+  input:focus, select:focus {
+    max-width: 100%;
+    width: 400px;
+  }
+
+  .nav-btn-div {
+    margin-top: 2rem;
+    color: var(--color-primary);
+    font-size: 0.8em;
+  }
+
+  .nav-button {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    font-size: 1em;
+    letter-spacing: 2px;
+    padding: 5px 25px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    transition: all 0.4s;
+  }
+
+  /* Estilo personalizado para botones de radio */
+  .radio-option input[type="radio"] {
+    display: none;
+  }
+
+  .radio-button {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .radio-button .option-letter {
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .radio-option input[type="radio"]:checked + .radio-button {
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .radio-option input[type="radio"]:checked + .radio-button .option-letter {
+    background-color: white;
+    color: var(--color-accent);
+  }
+</style>

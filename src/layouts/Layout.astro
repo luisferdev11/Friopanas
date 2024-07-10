@@ -1,0 +1,64 @@
+---
+// src/layouts/Layout.astro
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title || "Application Form"}</title>
+  <meta name="description" content={description || "Application form for football team"}>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="container">
+    <slot />
+  </div>
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --color-primary: #e7e7e7;
+    --color-secondary: #333;
+    --color-accent: #026e87;
+    --color-accent-rgb: 0, 123, 255;
+    --background-color: #06a6ca;
+    --background-twitch: #f0f0ff;
+    --color-twitch: #9146ff;
+    --color-twitch-ice: #f0f0ff;
+  }
+
+  @font-face {
+    font-family: Atomic;
+    font-display: swap;
+    src: url("https://cdn.lavelada.dev/fonts/font-atomic.woff2") format("woff2");
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--background-color);
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  div.container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    color: white;
+  }
+</style>
