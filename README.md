@@ -1,20 +1,10 @@
-# Astro Starter Kit: Basics
+# Friopanas Football Team Form
 
-```sh
-npm create astro@latest -- --template basics
-```
+Este proyecto es un formulario desarrollado con Astro para recopilar datos sobre los jugadores del equipo de fútbol Friopanas. El objetivo del formulario es obtener información relevante de los jugadores para optimizar los plantamientos tácticos, estrategias y roles para la próxima temporada.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🚀 Estructura del Proyecto
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Dentro de tu proyecto de Astro, verás las siguientes carpetas y archivos:
 
 ```text
 /
@@ -22,33 +12,61 @@ Inside of your Astro project, you'll see the following folders and files:
 │   └── favicon.svg
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
+│   │   ├── Form.astro
+│   │   └── FormField.astro
+│   ├── constants/
+│   │   └── questions.ts
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── pages/
+│   │   └── index.astro
+│   ├── types/
+│   │   └── types.ts
+│   └── env.d.ts
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `src/pages/`: Contiene las páginas de tu proyecto. Cada archivo `.astro` o `.md` en este directorio se expone como una ruta basada en su nombre de archivo.
+- `src/components/`: Aquí se colocan los componentes de Astro utilizados en el proyecto.
+- `src/constants/`: Contiene archivos de constantes, como las preguntas del formulario.
+- `src/layouts/`: Contiene los diseños de página reutilizables, como el diseño principal del sitio.
+- `src/types/`: Contiene los tipos TypeScript utilizados en el proyecto.
+- `public/`: Aquí se colocan los recursos estáticos como imágenes y archivos de íconos.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🧞 Comandos
 
-Any static assets, like images, can be placed in the `public/` directory.
+Todos los comandos se ejecutan desde la raíz del proyecto, desde un terminal:
 
-## 🧞 Commands
+| Comando                   | Acción                                                      |
+| :------------------------ | :---------------------------------------------------------- |
+| `npm install`             | Instala las dependencias                                    |
+| `npm run dev`             | Inicia el servidor de desarrollo local en `localhost:4321`  |
+| `npm run build`           | Construye tu sitio de producción en `./dist/`               |
+| `npm run preview`         | Previsualiza tu construcción localmente, antes de desplegar |
+| `npm run astro ...`       | Ejecuta comandos CLI como `astro add`, `astro check`        |
+| `npm run astro -- --help` | Obtén ayuda utilizando el CLI de Astro                      |
 
-All commands are run from the root of the project, from a terminal:
+## 👀 ¿Quieres aprender más?
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Siéntete libre de consultar [La documentación de Astro](https://docs.astro.build) o unirte a su [servidor de Discord](https://astro.build/chat).
 
-## 👀 Want to learn more?
+## 📋 Preguntas del Formulario
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Estas son algunas de las preguntas que se encuentran en el formulario (Por ahora generadas por chatsito):
+
+- ¿Cuál es tu nombre?
+- ¿En qué posición te sientes más cómodo jugando?
+- ¿En qué posición has jugado en el equipo?
+- ¿Qué rol prefieres tener en el equipo?
+- ¿Cómo evaluarías tu nivel físico actual?
+- ¿Con qué estilo de juego te sientes más cómodo?
+- ¿Cuánto tiempo has jugado fútbol?
+- ¿Con qué frecuencia puedes asistir a los entrenamientos?
+- ¿Cómo calificarías tu condición física actual?
+- ¿Cuáles son tus expectativas para la próxima temporada?
+
+Estas preguntas están diseñadas para obtener una comprensión completa de las preferencias y habilidades de los jugadores, lo que permitirá planificar mejor la estrategia del equipo para la próxima temporada.
+
+---
+
+¡Gracias por contribuir a mejorar nuestro equipo Friopanas!
